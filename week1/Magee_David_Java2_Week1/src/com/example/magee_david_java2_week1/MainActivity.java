@@ -187,6 +187,8 @@ public class MainActivity extends Activity {
 						try 
 						{
 							resultsData = (String) msg.obj;
+							parseData(resultsData);
+							
 						}
 						catch (Exception e)
 						{
@@ -198,6 +200,7 @@ public class MainActivity extends Activity {
 				
 			};
 			
+			
 			Messenger urlMessenger = new Messenger(urlRequestHandler);
 			
 			Intent startURLIntent = new Intent(this, URLService.class);
@@ -206,7 +209,7 @@ public class MainActivity extends Activity {
 			
 			startService(startURLIntent);
 			
-			parseData(resultsData);
+			
 			
 			//END TEST HANDLER
 			

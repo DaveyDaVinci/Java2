@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Message;
 import android.os.Messenger;
+import android.util.Log;
 import connectionwork.ConnectionWork;
 
 public class URLService extends IntentService{
@@ -29,12 +30,13 @@ public class URLService extends IntentService{
 		Messenger messenger = (Messenger) savedExtras.get(URL_INFORMATION);
 		String baseURL = savedExtras.getString(BASE_URL);
 		
-		URL finishedURL;
+		
 		try {
 			finishedURL = new URL(baseURL);
 		} catch (MalformedURLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+			Log.i("OH NO", "Didn't work");
 		}
 		
 		Message message = Message.obtain();
