@@ -14,8 +14,12 @@ import jsonInfo.JSONData;
 
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
+import android.os.Messenger;
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.util.Log;
 import android.view.Menu;
 import android.view.View;
@@ -62,6 +66,8 @@ public class MainActivity extends Activity {
 	static String[] arrayOfCardNames = null;
 	
 	static Boolean connection = false;
+	
+	static String resultsData;
 	Context context;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -155,8 +161,60 @@ public class MainActivity extends Activity {
 		try
 		{
 			finishedURL = new URL(baseURL);
-			JokesRequest jokesReq = new JokesRequest();
-			jokesReq.execute(finishedURL);
+			
+			
+			//JokesRequest jokesReq = new JokesRequest();
+			//jokesReq.execute(finishedURL);
+			
+			
+			
+			
+			
+			
+			
+			//TEST HANDLER
+			Handler urlRequestHandler = new Handler(){
+
+				@Override
+				public void handleMessage(Message msg) {
+					// TODO Auto-generated method stub
+					
+					//String response = null;
+					//super.handleMessage(msg);
+					
+					if (msg.arg1 == RESULT_OK)
+					{
+						try 
+						{
+							resultsData = (String) msg.obj;
+						}
+						catch (Exception e)
+						{
+							Log.e("HandleMessage", e.getMessage().toString());
+							
+						}
+					}
+				}
+				
+			};
+			
+			Messenger urlMessenger = new Messenger(urlRequestHandler);
+			
+			Intent startURLIntent = new Intent(this, URLService.class);
+			startURLIntent.putExtra(URLService.URL_INFORMATION, urlMessenger);
+			startURLIntent.putExtra(URLService.BASE_URL, baseURL);
+			
+			startService(startURLIntent);
+			
+			parseData(resultsData);
+			
+			//END TEST HANDLER
+			
+			
+			
+			
+			
+			
 		} catch (MalformedURLException e)
 		{
 			Log.e("BAD URL", "MALFORMED URL");
@@ -268,6 +326,62 @@ public class MainActivity extends Activity {
 				}
 				
 			}
+		}
+		
+		
+		
+		
+		
+		
+		//TEST METHOD
+		public void parseData(String result)
+		{
+			JSONObject jsonResponse;
+			try {
+				jsonResponse = new JSONObject(result);
+				JSONArray theArray = jsonResponse.getJSONArray("cards");
+				int numberInArray = theArray.length();
+				
+				//JSONArray populatedArray = JSONData.jsonArrayOfCards(numberInArray, result);
+				
+				//String[] arrayOfCardNames = null;
+				
+				
+				textview0.setText(theArray.getJSONObject(0).getString("name"));
+				textview00.setText(theArray.getJSONObject(0).getString("high"));
+				textview000.setText(theArray.getJSONObject(0).getString("low"));
+				textview1.setText(theArray.getJSONObject(1).getString("name"));
+				textview11.setText(theArray.getJSONObject(1).getString("high"));
+				textview111.setText(theArray.getJSONObject(1).getString("low"));
+				textview2.setText(theArray.getJSONObject(2).getString("name"));
+				textview22.setText(theArray.getJSONObject(2).getString("high"));
+				textview222.setText(theArray.getJSONObject(2).getString("low"));
+				textview3.setText(theArray.getJSONObject(3).getString("name"));
+				textview33.setText(theArray.getJSONObject(3).getString("high"));
+				textview333.setText(theArray.getJSONObject(3).getString("low"));
+				textview4.setText(theArray.getJSONObject(4).getString("name"));
+				textview44.setText(theArray.getJSONObject(4).getString("high"));
+				textview444.setText(theArray.getJSONObject(4).getString("low"));
+				textview5.setText(theArray.getJSONObject(5).getString("name"));
+				textview55.setText(theArray.getJSONObject(5).getString("high"));
+				textview555.setText(theArray.getJSONObject(5).getString("low"));
+				textview6.setText(theArray.getJSONObject(6).getString("name"));
+				textview66.setText(theArray.getJSONObject(6).getString("high"));
+				textview666.setText(theArray.getJSONObject(6).getString("low"));
+				textview7.setText(theArray.getJSONObject(7).getString("name"));
+				textview77.setText(theArray.getJSONObject(7).getString("high"));
+				textview777.setText(theArray.getJSONObject(7).getString("low"));
+				textview8.setText(theArray.getJSONObject(8).getString("name"));
+				textview88.setText(theArray.getJSONObject(8).getString("high"));
+				textview888.setText(theArray.getJSONObject(8).getString("low"));
+				textview9.setText(theArray.getJSONObject(9).getString("name"));
+				textview99.setText(theArray.getJSONObject(9).getString("high"));
+				textview999.setText(theArray.getJSONObject(9).getString("low"));
+			} catch (JSONException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
 		}
 
 }
