@@ -9,7 +9,6 @@ import android.os.Bundle;
 import android.os.Message;
 import android.os.Messenger;
 import android.os.RemoteException;
-import android.util.Log;
 import connectionwork.ConnectionWork;
 
 //Service that handles the intent coming in.  Sets up the URL and opens the connection through ConnectionWork.  Returns and

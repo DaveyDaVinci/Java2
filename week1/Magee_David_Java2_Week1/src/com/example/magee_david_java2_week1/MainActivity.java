@@ -12,7 +12,6 @@ import org.json.JSONObject;
 import connectionwork.ConnectionWork;
 import com.example.magee_david_java2_week1.SaveClass;
 
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -131,13 +130,14 @@ public class MainActivity extends Activity {
 			//Gets joke
 			public void onClick(View v) {
 				
+				connection = ConnectionWork.getStatusOfConnection(context);
+				
 				if (connection == true)
 				{
 					getCardsAndValues();
 				}
 				else 
 				{
-					
 					
 					String resultsDataString = SaveClass.readStringData(context, "saveddata");
 					
@@ -191,14 +191,6 @@ public class MainActivity extends Activity {
 		try
 		{
 			finishedURL = new URL(baseURL);
-			
-			
-			//JokesRequest jokesReq = new JokesRequest();
-			//jokesReq.execute(finishedURL);
-			
-			
-			
-			
 			
 			
 			
@@ -271,12 +263,7 @@ public class MainActivity extends Activity {
 			try {
 				jsonResponse = new JSONObject(result);
 				JSONArray theArray = jsonResponse.getJSONArray("cards");
-				int numberInArray = theArray.length();
-				
-				//JSONArray populatedArray = JSONData.jsonArrayOfCards(numberInArray, result);
-				
-				//String[] arrayOfCardNames = null;
-				
+		
 				
 				textview0.setText(theArray.getJSONObject(0).getString("name"));
 				textview00.setText(theArray.getJSONObject(0).getString("high"));

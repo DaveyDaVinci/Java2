@@ -39,6 +39,7 @@ public class SaveClass {
 		String content = "";
 		
 		try{
+			@SuppressWarnings("unused")
 			File file = new File(filename);
 			FileInputStream fileInput = context.openFileInput(filename);
 			
