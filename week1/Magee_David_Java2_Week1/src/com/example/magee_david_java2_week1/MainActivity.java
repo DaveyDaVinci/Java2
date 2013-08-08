@@ -10,13 +10,14 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import connectionwork.ConnectionWork;
-import jsonInfo.JSONData;
+import com.example.magee_david_java2_week1.SaveClass;
 
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.os.Messenger;
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -109,9 +110,10 @@ public class MainActivity extends Activity {
 		
 		
 		
+		//BOOL TEST TO SEE IF CONNECTION IS AVAILABLE
 		connection = ConnectionWork.getStatusOfConnection(this);
 		
-		if (connection)
+		if (connection == true)
 		{
 			Log.i("NETWORKCONNECTION", ConnectionWork.getTheConnectionType(this));
 		} else
@@ -128,7 +130,32 @@ public class MainActivity extends Activity {
 			@Override
 			//Gets joke
 			public void onClick(View v) {
-				getCardsAndValues();
+				
+				if (connection == true)
+				{
+					getCardsAndValues();
+				}
+				else 
+				{
+					
+					
+					String resultsDataString = SaveClass.readStringData(context, "saveddata");
+					
+					if (resultsDataString != null && !resultsDataString.isEmpty() )
+					{
+						Toast toast = Toast.makeText(context, "NO CONNECTION AVAILABLE, DEFAULT VALUES LOADED",  Toast.LENGTH_SHORT);
+						toast.show();
+						
+						parseData(resultsDataString);
+					}
+					else
+					{
+						Toast secondToast = Toast.makeText(context, "NO DEFAULT VALUES TO LOAD",  Toast.LENGTH_SHORT);
+						secondToast.show();
+					}
+					
+				}
+				
 						
 			}
 		});
@@ -143,9 +170,11 @@ public class MainActivity extends Activity {
 		return true;
 	}
 	
+	@SuppressLint("HandlerLeak")
 	private void getCardsAndValues()
 	{
 		String baseURL = "http://blacklotusproject.com/json/";
+		@SuppressWarnings("unused")
 		String formattedURL;
 		try 
 		{
@@ -157,6 +186,7 @@ public class MainActivity extends Activity {
 			toast.show();
 			formattedURL = "";
 		}
+		@SuppressWarnings("unused")
 		URL finishedURL;
 		try
 		{
@@ -172,6 +202,7 @@ public class MainActivity extends Activity {
 			
 			
 			
+			
 			//TEST HANDLER
 			Handler urlRequestHandler = new Handler(){
 
@@ -179,15 +210,19 @@ public class MainActivity extends Activity {
 				public void handleMessage(Message msg) {
 					// TODO Auto-generated method stub
 					
-					//String response = null;
-					//super.handleMessage(msg);
+					
 					
 					if (msg.arg1 == RESULT_OK)
 					{
 						try 
 						{
 							resultsData = (String) msg.obj;
-							parseData(resultsData);
+							//parseData(resultsData);
+							
+							String resultsDataString = SaveClass.readStringData(context, "saveddata");
+							
+							parseData(resultsDataString);
+							
 							
 						}
 						catch (Exception e)
@@ -227,113 +262,6 @@ public class MainActivity extends Activity {
 		}
 	}
 	
-	//This is the method that's done in hte background
-	//will be replaced with services
-		private class JokesRequest extends AsyncTask<URL, Void, String>
-		{
-			@Override
-			protected String doInBackground(URL...urls)
-			{
-				String response = "";
-				for (URL url: urls)
-				{
-					response = ConnectionWork.getURLResponse(url);
-				}
-				return response;
-			}
-			
-			@Override
-			protected void onPostExecute(String result)
-			{
-				Log.i("URL RESPONSE", result);
-				
-				
-				try 
-				{
-					JSONObject jsonResponse = new JSONObject(result);
-					JSONArray theArray = jsonResponse.getJSONArray("cards");
-					int numberInArray = theArray.length();
-					
-					//JSONArray populatedArray = JSONData.jsonArrayOfCards(numberInArray, result);
-					
-					//String[] arrayOfCardNames = null;
-					
-					
-					textview0.setText(theArray.getJSONObject(0).getString("name"));
-					textview00.setText(theArray.getJSONObject(0).getString("high"));
-					textview000.setText(theArray.getJSONObject(0).getString("low"));
-					textview1.setText(theArray.getJSONObject(1).getString("name"));
-					textview11.setText(theArray.getJSONObject(1).getString("high"));
-					textview111.setText(theArray.getJSONObject(1).getString("low"));
-					textview2.setText(theArray.getJSONObject(2).getString("name"));
-					textview22.setText(theArray.getJSONObject(2).getString("high"));
-					textview222.setText(theArray.getJSONObject(2).getString("low"));
-					textview3.setText(theArray.getJSONObject(3).getString("name"));
-					textview33.setText(theArray.getJSONObject(3).getString("high"));
-					textview333.setText(theArray.getJSONObject(3).getString("low"));
-					textview4.setText(theArray.getJSONObject(4).getString("name"));
-					textview44.setText(theArray.getJSONObject(4).getString("high"));
-					textview444.setText(theArray.getJSONObject(4).getString("low"));
-					textview5.setText(theArray.getJSONObject(5).getString("name"));
-					textview55.setText(theArray.getJSONObject(5).getString("high"));
-					textview555.setText(theArray.getJSONObject(5).getString("low"));
-					textview6.setText(theArray.getJSONObject(6).getString("name"));
-					textview66.setText(theArray.getJSONObject(6).getString("high"));
-					textview666.setText(theArray.getJSONObject(6).getString("low"));
-					textview7.setText(theArray.getJSONObject(7).getString("name"));
-					textview77.setText(theArray.getJSONObject(7).getString("high"));
-					textview777.setText(theArray.getJSONObject(7).getString("low"));
-					textview8.setText(theArray.getJSONObject(8).getString("name"));
-					textview88.setText(theArray.getJSONObject(8).getString("high"));
-					textview888.setText(theArray.getJSONObject(8).getString("low"));
-					textview9.setText(theArray.getJSONObject(9).getString("name"));
-					textview99.setText(theArray.getJSONObject(9).getString("high"));
-					textview999.setText(theArray.getJSONObject(9).getString("low"));
-					
-					
-					
-					
-					/*
-					for (int i = 0; i < numberInArray; i++)
-					{
-						JSONObject selectedObject = theArray.getJSONObject(i);
-						
-						String selectedName = selectedObject.getString("name");
-						
-						arrayOfCardNames[i] = selectedName;
-						
-						
-						
-						
-					}
-							
-					Log.i("derp", arrayOfCardNames[2]);
-					
-					*/
-					
-					
-					//String numValue = Integer.toString(numberInArray);
-					//Log.i("Test for amount", numValue);
-					//JSONObject singleObject = theArray.getJSONObject(0);
-					//String valueOfObject = singleObject.getString("name");
-					//Log.i("Name", valueOfObject);
-					//JSONObject theArray = jsonResponse.getJSONObject("cards");
-					//String exampleString = theArray.getString("name"); 
-					//Log.i("example", exampleString);
-					//JSONObject jsonResults = jsonResponse.getJSONObject("value");
-					//joke = jsonResults.getString("joke");
-					//singleText.setText(joke);
-					
-				} catch (JSONException e) {
-					Log.e("JSON", "JSON OBJECT EXCEPTION");
-				}
-				
-			}
-		}
-		
-		
-		
-		
 		
 		
 		//TEST METHOD

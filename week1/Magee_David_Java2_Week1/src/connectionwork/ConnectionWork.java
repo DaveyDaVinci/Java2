@@ -37,6 +37,11 @@ public class ConnectionWork {
 				theConnectionType = netInfo.getTypeName();
 				theConnection = true;
 			}
+			else
+			{
+				theConnectionType = null;
+				theConnection = false;
+			}
 		}
 	}
 	

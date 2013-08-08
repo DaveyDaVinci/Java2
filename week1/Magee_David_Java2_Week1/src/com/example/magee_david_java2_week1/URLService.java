@@ -1,16 +1,19 @@
 package com.example.magee_david_java2_week1;
 import java.net.MalformedURLException;
 import java.net.URL;
-
+import com.example.magee_david_java2_week1.SaveClass;
 import android.app.Activity;
 import android.app.IntentService;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Message;
 import android.os.Messenger;
+import android.os.RemoteException;
 import android.util.Log;
 import connectionwork.ConnectionWork;
 
+//Service that handles the intent coming in.  Sets up the URL and opens the connection through ConnectionWork.  Returns and
+//saves string
 public class URLService extends IntentService{
 
 	public static final String URL_INFORMATION = "";
@@ -36,12 +39,22 @@ public class URLService extends IntentService{
 		} catch (MalformedURLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-			Log.i("OH NO", "Didn't work");
 		}
 		
 		Message message = Message.obtain();
 		message.arg1 = Activity.RESULT_OK;
+		
+		String resultsString = ConnectionWork.getURLResponse(URLService.finishedURL);
+		
+		SaveClass.storeJSONStringData(this, "saveddata", resultsString);
+		
 		message.obj = ConnectionWork.getURLResponse(URLService.finishedURL);
+		try {
+			messenger.send(message);
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 	}
 
