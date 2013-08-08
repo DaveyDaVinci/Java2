@@ -75,6 +75,8 @@ public class MainActivity extends Activity {
 		setContentView(R.layout.main_scrollview);
 		context = this;
 		
+		
+		//Sets text views
 		textview0 = (TextView) findViewById(R.id.card0);
 		textview00 = (TextView) findViewById(R.id.card00);
 		textview000 = (TextView) findViewById(R.id.card000);
@@ -170,6 +172,7 @@ public class MainActivity extends Activity {
 		return true;
 	}
 	
+	//Creats and trims the URL
 	@SuppressLint("HandlerLeak")
 	private void getCardsAndValues()
 	{
@@ -228,6 +231,7 @@ public class MainActivity extends Activity {
 			};
 			
 			
+			//Creates a messenger and intent to send to the service.  Intent handles data sending
 			Messenger urlMessenger = new Messenger(urlRequestHandler);
 			
 			Intent startURLIntent = new Intent(this, URLService.class);
