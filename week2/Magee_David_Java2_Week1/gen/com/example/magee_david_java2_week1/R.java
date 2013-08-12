@@ -27,39 +27,24 @@ public final class R {
         public static final int magictemplate=0x7f020003;
     }
     public static final class id {
-        public static final int action_settings=0x7f080020;
-        public static final int card0=0x7f080000;
-        public static final int card00=0x7f080001;
-        public static final int card000=0x7f080002;
-        public static final int card1=0x7f080003;
-        public static final int card11=0x7f080004;
-        public static final int card111=0x7f080005;
-        public static final int card2=0x7f080006;
-        public static final int card22=0x7f080007;
-        public static final int card222=0x7f080008;
-        public static final int card3=0x7f080009;
-        public static final int card33=0x7f08000a;
-        public static final int card333=0x7f08000b;
-        public static final int card4=0x7f08000c;
-        public static final int card44=0x7f08000d;
-        public static final int card444=0x7f08000e;
-        public static final int card5=0x7f08000f;
-        public static final int card55=0x7f080010;
-        public static final int card555=0x7f080011;
-        public static final int card6=0x7f080012;
-        public static final int card66=0x7f080013;
-        public static final int card666=0x7f080014;
-        public static final int card7=0x7f080015;
-        public static final int card77=0x7f080016;
-        public static final int card777=0x7f080017;
-        public static final int card8=0x7f080018;
-        public static final int card88=0x7f080019;
-        public static final int card888=0x7f08001a;
-        public static final int card9=0x7f08001b;
-        public static final int card99=0x7f08001c;
-        public static final int card999=0x7f08001d;
-        public static final int getCardsButton=0x7f08001f;
-        public static final int getNumInput=0x7f08001e;
+        public static final int action_settings=0x7f080011;
+        public static final int button0=0x7f080001;
+        public static final int button1=0x7f080002;
+        public static final int button2=0x7f080003;
+        public static final int button3=0x7f080004;
+        public static final int button4=0x7f080005;
+        public static final int button5=0x7f080006;
+        public static final int button6=0x7f080007;
+        public static final int button7=0x7f080008;
+        public static final int button8=0x7f080009;
+        public static final int button9=0x7f08000a;
+        public static final int cardAverage=0x7f08000f;
+        public static final int cardHigh=0x7f08000d;
+        public static final int cardLow=0x7f08000e;
+        public static final int cardName=0x7f08000b;
+        public static final int cardPrice=0x7f08000c;
+        public static final int getCardsButton=0x7f080010;
+        public static final int radioGroup=0x7f080000;
     }
     public static final class layout {
         public static final int activity_main=0x7f030000;
@@ -101,9 +86,11 @@ public final class R {
  All customizations that are NOT specific to a particular API-level can go here. 
          */
         public static final int AppTheme=0x7f060001;
+        public static final int AverageText=0x7f060007;
         public static final int CardText=0x7f060005;
         public static final int HighText=0x7f060003;
         public static final int LowText=0x7f060004;
         public static final int MyCustomTheme=0x7f060002;
+        public static final int PriceText=0x7f060006;
     }
 }

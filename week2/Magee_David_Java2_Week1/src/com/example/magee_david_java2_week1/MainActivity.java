@@ -22,6 +22,8 @@ import android.view.Menu;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 import connectionwork.ConnectionWork;
@@ -29,38 +31,29 @@ import connectionwork.ConnectionWork;
 public class MainActivity extends Activity {
 
 	
-	static TextView textview0;
-	static TextView textview00;
-	static TextView textview000;
-	static TextView textview1;
-	static TextView textview11;
-	static TextView textview111;
-	static TextView textview2;
-	static TextView textview22;
-	static TextView textview222;
-	static TextView textview3;
-	static TextView textview33;
-	static TextView textview333;
-	static TextView textview4;
-	static TextView textview44;
-	static TextView textview444;
-	static TextView textview5;
-	static TextView textview55;
-	static TextView textview555;
-	static TextView textview6;
-	static TextView textview66;
-	static TextView textview666;
-	static TextView textview7;
-	static TextView textview77;
-	static TextView textview777;
-	static TextView textview8;
-	static TextView textview88;
-	static TextView textview888;
-	static TextView textview9;
-	static TextView textview99;
-	static TextView textview999;
+	
+	static TextView cardName;
+	static TextView cardHigh;
+	static TextView cardLow;
+	static TextView cardPrice;
+	static TextView cardAverage;
 	
 	static EditText numberInput;
+	
+	static RadioGroup loadedCards;
+	
+	static RadioButton button0;
+	static RadioButton button1;
+	static RadioButton button2;
+	static RadioButton button3;
+	static RadioButton button4;
+	static RadioButton button5;
+	static RadioButton button6;
+	static RadioButton button7;
+	static RadioButton button8;
+	static RadioButton button9;
+	
+	static JSONArray theArray;
 	
 	
 	static String[] arrayOfCardNames = null;
@@ -76,37 +69,11 @@ public class MainActivity extends Activity {
 		context = this;
 		
 		
-		//Sets text views
-		textview0 = (TextView) findViewById(R.id.card0);
-		textview00 = (TextView) findViewById(R.id.card00);
-		textview000 = (TextView) findViewById(R.id.card000);
-		textview1 = (TextView) findViewById(R.id.card1);
-		textview11 = (TextView) findViewById(R.id.card11);
-		textview111 = (TextView) findViewById(R.id.card111);
-		textview2 = (TextView) findViewById(R.id.card2);
-		textview22 = (TextView) findViewById(R.id.card22);
-		textview222 = (TextView) findViewById(R.id.card222);
-		textview3 = (TextView) findViewById(R.id.card3);
-		textview33 = (TextView) findViewById(R.id.card33);
-		textview333 = (TextView) findViewById(R.id.card333);
-		textview4 = (TextView) findViewById(R.id.card4);
-		textview44 = (TextView) findViewById(R.id.card44);
-		textview444 = (TextView) findViewById(R.id.card444);
-		textview5 = (TextView) findViewById(R.id.card5);
-		textview55 = (TextView) findViewById(R.id.card55);
-		textview555 = (TextView) findViewById(R.id.card555);
-		textview6 = (TextView) findViewById(R.id.card6);
-		textview66 = (TextView) findViewById(R.id.card66);
-		textview666 = (TextView) findViewById(R.id.card666);
-		textview7 = (TextView) findViewById(R.id.card7);
-		textview77 = (TextView) findViewById(R.id.card77);
-		textview777 = (TextView) findViewById(R.id.card777);
-		textview8 = (TextView) findViewById(R.id.card8);
-		textview88 = (TextView) findViewById(R.id.card88);
-		textview888 = (TextView) findViewById(R.id.card888);
-		textview9 = (TextView) findViewById(R.id.card9);
-		textview99 = (TextView) findViewById(R.id.card99);
-		textview999 = (TextView) findViewById(R.id.card999);
+		cardName = (TextView) findViewById(R.id.cardName);
+		cardHigh = (TextView) findViewById(R.id.cardHigh);
+		cardLow = (TextView) findViewById(R.id.cardLow);
+		cardPrice = (TextView) findViewById(R.id.cardPrice);
+		cardAverage = (TextView) findViewById(R.id.cardAverage);
 		
 		
 		
@@ -125,7 +92,36 @@ public class MainActivity extends Activity {
 		
 		
 		
-		numberInput = (EditText) findViewById(R.id.getNumInput);
+		loadedCards = (RadioGroup) findViewById(R.id.radioGroup);
+		
+		
+		
+		connection = ConnectionWork.getStatusOfConnection(context);
+		
+		if (connection == true)
+		{
+			getCardsAndValues();
+		}
+		else 
+		{
+			
+			String resultsDataString = SaveClass.readStringData(context, "saveddata");
+			
+			if (resultsDataString != null && !resultsDataString.isEmpty() )
+			{
+				Toast toast = Toast.makeText(context, "NO CONNECTION AVAILABLE, DEFAULT VALUES LOADED",  Toast.LENGTH_SHORT);
+				toast.show();
+				
+				parseData(resultsDataString);
+			}
+			else
+			{
+				Toast secondToast = Toast.makeText(context, "NO DEFAULT VALUES TO LOAD",  Toast.LENGTH_SHORT);
+				secondToast.show();
+			}
+			
+		}
+		
 		
 		
 		Button getJokesButton = (Button) findViewById(R.id.getCardsButton);
@@ -138,31 +134,25 @@ public class MainActivity extends Activity {
 				
 				
 				
+				int selectedButton = loadedCards.getCheckedRadioButtonId();
+				RadioButton selectedRadioButton = (RadioButton) loadedCards.findViewById(selectedButton);
 				
-				connection = ConnectionWork.getStatusOfConnection(context);
+				int index = loadedCards.indexOfChild(selectedRadioButton);
 				
-				if (connection == true)
-				{
-					getCardsAndValues();
-				}
-				else 
-				{
-					
-					String resultsDataString = SaveClass.readStringData(context, "saveddata");
-					
-					if (resultsDataString != null && !resultsDataString.isEmpty() )
-					{
-						Toast toast = Toast.makeText(context, "NO CONNECTION AVAILABLE, DEFAULT VALUES LOADED",  Toast.LENGTH_SHORT);
-						toast.show();
-						
-						parseData(resultsDataString);
-					}
-					else
-					{
-						Toast secondToast = Toast.makeText(context, "NO DEFAULT VALUES TO LOAD",  Toast.LENGTH_SHORT);
-						secondToast.show();
-					}
-					
+				String selectedString = Integer.toString(index);
+				
+				Log.i("Selected", selectedString);
+				
+				
+				try {
+					cardName.setText(theArray.getJSONObject(index).getString("name"));
+					cardPrice.setText("Price:  " + theArray.getJSONObject(index).getString("price"));
+					cardHigh.setText("High:  " + theArray.getJSONObject(index).getString("high"));
+					cardLow.setText("Low:  " + theArray.getJSONObject(index).getString("low"));
+					cardAverage.setText("Average:  " + theArray.getJSONObject(index).getString("average"));
+				} catch (JSONException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
 				}
 				
 						
@@ -181,7 +171,7 @@ public class MainActivity extends Activity {
 		return true;
 	}
 	
-	//Creats and trims the URL
+	//Creates and trims the URL
 	@SuppressLint("HandlerLeak")
 	private void getCardsAndValues()
 	{
@@ -275,7 +265,7 @@ public class MainActivity extends Activity {
 			JSONObject jsonResponse;
 			try {
 				jsonResponse = new JSONObject(result);
-				JSONArray theArray = jsonResponse.getJSONArray("cards");
+				theArray = jsonResponse.getJSONArray("cards");
 				
 				int length = theArray.length();
 				
@@ -283,50 +273,29 @@ public class MainActivity extends Activity {
 				
 				Log.i("test", lengthString);
 				
-				/*
-				int inputLength = Integer.parseInt(numberInput.getText().toString());
 				
-				if (inputLength == 0 || numberInput.getText().toString().isEmpty())
-				{
-					
-				} else if (inputLength <= 10)
-				{
-					
-				} else
-				{
-					
-				}
-				*/
-				textview0.setText(theArray.getJSONObject(0).getString("name"));
-				textview00.setText(theArray.getJSONObject(0).getString("high"));
-				textview000.setText(theArray.getJSONObject(0).getString("low"));
-				textview1.setText(theArray.getJSONObject(1).getString("name"));
-				textview11.setText(theArray.getJSONObject(1).getString("high"));
-				textview111.setText(theArray.getJSONObject(1).getString("low"));
-				textview2.setText(theArray.getJSONObject(2).getString("name"));
-				textview22.setText(theArray.getJSONObject(2).getString("high"));
-				textview222.setText(theArray.getJSONObject(2).getString("low"));
-				textview3.setText(theArray.getJSONObject(3).getString("name"));
-				textview33.setText(theArray.getJSONObject(3).getString("high"));
-				textview333.setText(theArray.getJSONObject(3).getString("low"));
-				textview4.setText(theArray.getJSONObject(4).getString("name"));
-				textview44.setText(theArray.getJSONObject(4).getString("high"));
-				textview444.setText(theArray.getJSONObject(4).getString("low"));
-				textview5.setText(theArray.getJSONObject(5).getString("name"));
-				textview55.setText(theArray.getJSONObject(5).getString("high"));
-				textview555.setText(theArray.getJSONObject(5).getString("low"));
-				textview6.setText(theArray.getJSONObject(6).getString("name"));
-				textview66.setText(theArray.getJSONObject(6).getString("high"));
-				textview666.setText(theArray.getJSONObject(6).getString("low"));
-				textview7.setText(theArray.getJSONObject(7).getString("name"));
-				textview77.setText(theArray.getJSONObject(7).getString("high"));
-				textview777.setText(theArray.getJSONObject(7).getString("low"));
-				textview8.setText(theArray.getJSONObject(8).getString("name"));
-				textview88.setText(theArray.getJSONObject(8).getString("high"));
-				textview888.setText(theArray.getJSONObject(8).getString("low"));
-				textview9.setText(theArray.getJSONObject(9).getString("name"));
-				textview99.setText(theArray.getJSONObject(9).getString("high"));
-				textview999.setText(theArray.getJSONObject(9).getString("low"));
+				button0 = (RadioButton) findViewById(R.id.button0);
+				button0.setText(theArray.getJSONObject(0).getString("name"));
+				button1 = (RadioButton) findViewById(R.id.button1);
+				button1.setText(theArray.getJSONObject(1).getString("name"));
+				button2 = (RadioButton) findViewById(R.id.button2);
+				button2.setText(theArray.getJSONObject(2).getString("name"));
+				button3 = (RadioButton) findViewById(R.id.button3);
+				button3.setText(theArray.getJSONObject(3).getString("name"));
+				button4 = (RadioButton) findViewById(R.id.button4);
+				button4.setText(theArray.getJSONObject(4).getString("name"));
+				button5 = (RadioButton) findViewById(R.id.button5);
+				button5.setText(theArray.getJSONObject(5).getString("name"));
+				button6 = (RadioButton) findViewById(R.id.button6);
+				button6.setText(theArray.getJSONObject(6).getString("name"));
+				button7 = (RadioButton) findViewById(R.id.button7);
+				button7.setText(theArray.getJSONObject(7).getString("name"));
+				button8 = (RadioButton) findViewById(R.id.button8);
+				button8.setText(theArray.getJSONObject(8).getString("name"));
+				button9 = (RadioButton) findViewById(R.id.button9);
+				button9.setText(theArray.getJSONObject(9).getString("name"));
+				
+				
 			} catch (JSONException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -334,49 +303,7 @@ public class MainActivity extends Activity {
 			
 		}
 		
-		/*
-		public void displayData (int numberEntered, JSONArray theArray)
-		{
-			try {
-				for (int i = 0; i < numberEntered; i++)
-				{
-					
-				}
-				textview0.setText(theArray.getJSONObject(0).getString("name"));
-				textview00.setText(theArray.getJSONObject(0).getString("high"));
-				textview000.setText(theArray.getJSONObject(0).getString("low"));
-				textview1.setText(theArray.getJSONObject(1).getString("name"));
-				textview11.setText(theArray.getJSONObject(1).getString("high"));
-				textview111.setText(theArray.getJSONObject(1).getString("low"));
-				textview2.setText(theArray.getJSONObject(2).getString("name"));
-				textview22.setText(theArray.getJSONObject(2).getString("high"));
-				textview222.setText(theArray.getJSONObject(2).getString("low"));
-				textview3.setText(theArray.getJSONObject(3).getString("name"));
-				textview33.setText(theArray.getJSONObject(3).getString("high"));
-				textview333.setText(theArray.getJSONObject(3).getString("low"));
-				textview4.setText(theArray.getJSONObject(4).getString("name"));
-				textview44.setText(theArray.getJSONObject(4).getString("high"));
-				textview444.setText(theArray.getJSONObject(4).getString("low"));
-				textview5.setText(theArray.getJSONObject(5).getString("name"));
-				textview55.setText(theArray.getJSONObject(5).getString("high"));
-				textview555.setText(theArray.getJSONObject(5).getString("low"));
-				textview6.setText(theArray.getJSONObject(6).getString("name"));
-				textview66.setText(theArray.getJSONObject(6).getString("high"));
-				textview666.setText(theArray.getJSONObject(6).getString("low"));
-				textview7.setText(theArray.getJSONObject(7).getString("name"));
-				textview77.setText(theArray.getJSONObject(7).getString("high"));
-				textview777.setText(theArray.getJSONObject(7).getString("low"));
-				textview8.setText(theArray.getJSONObject(8).getString("name"));
-				textview88.setText(theArray.getJSONObject(8).getString("high"));
-				textview888.setText(theArray.getJSONObject(8).getString("low"));
-				textview9.setText(theArray.getJSONObject(9).getString("name"));
-				textview99.setText(theArray.getJSONObject(9).getString("high"));
-				textview999.setText(theArray.getJSONObject(9).getString("low"));
-			} catch (JSONException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			
-		}
-		*/
+		
+		
+		
 }
