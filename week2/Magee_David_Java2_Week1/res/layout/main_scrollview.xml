@@ -1,0 +1,384 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/magictemplate" >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical" >
+        
+        
+        
+        
+        
+        <HorizontalScrollView 
+	        android:layout_height="254dp"
+	        android:layout_width="match_parent"
+	        android:layout_marginLeft="23dp"
+	        android:layout_marginRight="25dp"
+	        android:layout_marginTop="29dp"
+	        android:background="@drawable/magiclogo">
+        	
+            <LinearLayout 
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:orientation="horizontal">
+                
+                <LinearLayout 
+                    android:layout_height="wrap_content"
+                    android:layout_width="wrap_content"
+                    android:orientation="vertical"
+                    >
+                    
+                    <TextView 
+                    android:id="@+id/card0"
+	                android:layout_height="wrap_content"
+	                android:layout_width="wrap_content"
+	                android:paddingLeft="20dp"
+	                android:paddingRight="20dp"
+	                style="@style/CardText"/>
+                    
+                    <TextView 
+                    android:id="@+id/card00"
+	                android:layout_height="wrap_content"
+	                android:layout_width="wrap_content"
+	                android:paddingLeft="20dp"
+	                android:paddingRight="20dp"
+	                style="@style/HighText"/>
+                    
+                    <TextView 
+                    android:id="@+id/card000"
+	                android:layout_height="wrap_content"
+	                android:layout_width="wrap_content"
+	                android:paddingLeft="20dp"
+	                android:paddingRight="20dp"
+	                style="@style/LowText"/>
+                    
+                </LinearLayout>
+                
+                <LinearLayout 
+                    android:layout_height="wrap_content"
+                    android:layout_width="wrap_content"
+                    android:orientation="vertical"
+                    >
+                    
+                    <TextView 
+                    android:id="@+id/card1"
+	                android:layout_height="wrap_content"
+	                android:layout_width="wrap_content"
+	                style="@style/CardText"
+	                android:paddingLeft="20dp"
+	                android:paddingRight="20dp"/>
+                    
+                    <TextView 
+                    android:id="@+id/card11"
+	                android:layout_height="wrap_content"
+	                android:layout_width="wrap_content"
+	                style="@style/HighText"
+	                android:paddingLeft="20dp"
+	                android:paddingRight="20dp"/>
+                    
+                    <TextView 
+                    android:id="@+id/card111"
+	                android:layout_height="wrap_content"
+	                android:layout_width="wrap_content"
+	                style="@style/LowText"
+	                android:paddingLeft="20dp"
+	                android:paddingRight="20dp"/>
+                    
+                </LinearLayout>
+                
+                <LinearLayout 
+                    android:layout_height="wrap_content"
+                    android:layout_width="wrap_content"
+                    android:orientation="vertical"
+                    >
+                    
+                    <TextView 
+                    android:id="@+id/card2"
+	                android:layout_height="wrap_content"
+	                android:layout_width="wrap_content"
+	                style="@style/CardText"
+	                android:paddingLeft="20dp"
+	                android:paddingRight="20dp"/>
+                    
+                    <TextView 
+                    android:id="@+id/card22"
+	                android:layout_height="wrap_content"
+	                android:layout_width="wrap_content"
+	                style="@style/HighText"
+	                android:paddingLeft="20dp"
+	                android:paddingRight="20dp"/>
+                    
+                    <TextView 
+                    android:id="@+id/card222"
+	                android:layout_height="wrap_content"
+	                android:layout_width="wrap_content"
+	                style="@style/LowText"
+	                android:paddingLeft="20dp"
+	                android:paddingRight="20dp"/>
+                    
+                </LinearLayout>
+                
+                <LinearLayout 
+                    android:layout_height="wrap_content"
+                    android:layout_width="wrap_content"
+                    android:orientation="vertical"
+                    >
+                    
+                    <TextView 
+                    android:id="@+id/card3"
+	                android:layout_height="wrap_content"
+	                android:layout_width="wrap_content"
+	                style="@style/CardText"
+	                android:paddingLeft="20dp"
+	                android:paddingRight="20dp"/>
+                    
+                    <TextView 
+                    android:id="@+id/card33"
+	                android:layout_height="wrap_content"
+	                android:layout_width="wrap_content"
+	                style="@style/HighText"
+	                android:paddingLeft="20dp"
+	                android:paddingRight="20dp"/>
+                    
+                    <TextView 
+                    android:id="@+id/card333"
+	                android:layout_height="wrap_content"
+	                android:layout_width="wrap_content"
+	                style="@style/LowText"
+	                android:paddingLeft="20dp"
+	                android:paddingRight="20dp"/>
+                    
+                </LinearLayout>
+                
+                <LinearLayout 
+                    android:layout_height="wrap_content"
+                    android:layout_width="wrap_content"
+                    android:orientation="vertical"
+                    >
+                    
+                    <TextView 
+                    android:id="@+id/card4"
+	                android:layout_height="wrap_content"
+	                android:layout_width="wrap_content"
+	                style="@style/CardText"
+	                android:paddingLeft="20dp"
+	                android:paddingRight="20dp"/>
+                    
+                    <TextView 
+                    android:id="@+id/card44"
+	                android:layout_height="wrap_content"
+	                android:layout_width="wrap_content"
+	                style="@style/HighText"
+	                android:paddingLeft="20dp"
+	                android:paddingRight="20dp"/>
+                    
+                    <TextView 
+                    android:id="@+id/card444"
+	                android:layout_height="wrap_content"
+	                android:layout_width="wrap_content"
+	                style="@style/LowText"
+	                android:paddingLeft="20dp"
+	                android:paddingRight="20dp"/>
+                    
+                </LinearLayout>
+                
+                <LinearLayout 
+                    android:layout_height="wrap_content"
+                    android:layout_width="wrap_content"
+                    android:orientation="vertical"
+                    >
+                    
+                    <TextView 
+                    android:id="@+id/card5"
+	                android:layout_height="wrap_content"
+	                android:layout_width="wrap_content"
+	                style="@style/CardText"
+	                android:paddingLeft="20dp"
+	                android:paddingRight="20dp"/>
+                    
+                    <TextView 
+                    android:id="@+id/card55"
+	                android:layout_height="wrap_content"
+	                android:layout_width="wrap_content"
+	                style="@style/HighText"
+	                android:paddingLeft="20dp"
+	                android:paddingRight="20dp"/>
+                    
+                    <TextView 
+                    android:id="@+id/card555"
+	                android:layout_height="wrap_content"
+	                android:layout_width="wrap_content"
+	                style="@style/LowText"
+	                android:paddingLeft="20dp"
+	                android:paddingRight="20dp"/>
+                    
+                </LinearLayout>
+                
+                <LinearLayout 
+                    android:layout_height="wrap_content"
+                    android:layout_width="wrap_content"
+                    android:orientation="vertical"
+                    >
+                    
+                    <TextView 
+                    android:id="@+id/card6"
+	                android:layout_height="wrap_content"
+	                android:layout_width="wrap_content"
+	                style="@style/CardText"
+	                android:paddingLeft="20dp"
+	                android:paddingRight="20dp"/>
+                    
+                    <TextView 
+                    android:id="@+id/card66"
+	                android:layout_height="wrap_content"
+	                android:layout_width="wrap_content"
+	                style="@style/HighText"
+	                android:paddingLeft="20dp"
+	                android:paddingRight="20dp"/>
+                    
+                    <TextView 
+                    android:id="@+id/card666"
+	                android:layout_height="wrap_content"
+	                android:layout_width="wrap_content"
+	                style="@style/LowText"
+	                android:paddingLeft="20dp"
+	                android:paddingRight="20dp"/>
+                    
+                </LinearLayout>
+                
+                <LinearLayout 
+                    android:layout_height="wrap_content"
+                    android:layout_width="wrap_content"
+                    android:orientation="vertical"
+                    >
+                    
+                    <TextView 
+                    android:id="@+id/card7"
+	                android:layout_height="wrap_content"
+	                android:layout_width="wrap_content"
+	                style="@style/CardText"
+	                android:paddingLeft="20dp"
+	                android:paddingRight="20dp"/>
+                    
+                    <TextView 
+                    android:id="@+id/card77"
+	                android:layout_height="wrap_content"
+	                android:layout_width="wrap_content"
+	                style="@style/HighText"
+	                android:paddingLeft="20dp"
+	                android:paddingRight="20dp"/>
+                    
+                    <TextView 
+                    android:id="@+id/card777"
+	                android:layout_height="wrap_content"
+	                android:layout_width="wrap_content"
+	                style="@style/LowText"
+	                android:paddingLeft="20dp"
+	                android:paddingRight="20dp"/>
+                    
+                </LinearLayout>
+                
+                <LinearLayout 
+                    android:layout_height="wrap_content"
+                    android:layout_width="wrap_content"
+                    android:orientation="vertical"
+                    >
+                    
+                    <TextView 
+                    android:id="@+id/card8"
+	                android:layout_height="wrap_content"
+	                android:layout_width="wrap_content"
+	                style="@style/CardText"
+	                android:paddingLeft="20dp"
+	                android:paddingRight="20dp"/>
+                    
+                    <TextView 
+                    android:id="@+id/card88"
+	                android:layout_height="wrap_content"
+	                android:layout_width="wrap_content"
+	                style="@style/HighText"
+	                android:paddingLeft="20dp"
+	                android:paddingRight="20dp"/>
+                    
+                    <TextView 
+                    android:id="@+id/card888"
+	                android:layout_height="wrap_content"
+	                android:layout_width="wrap_content"
+	                style="@style/LowText"
+	                android:paddingLeft="20dp"
+	                android:paddingRight="20dp"/>
+                    
+                </LinearLayout>
+                
+                <LinearLayout 
+                    android:layout_height="wrap_content"
+                    android:layout_width="wrap_content"
+                    android:orientation="vertical"
+                    >
+                    
+                    <TextView 
+                    android:id="@+id/card9"
+	                android:layout_height="wrap_content"
+	                android:layout_width="wrap_content"
+	                style="@style/CardText"
+	                android:paddingLeft="20dp"
+	                android:paddingRight="20dp"/>
+                    
+                    <TextView 
+                    android:id="@+id/card99"
+	                android:layout_height="wrap_content"
+	                android:layout_width="wrap_content"
+	                style="@style/HighText"
+	                android:paddingLeft="20dp"
+	                android:paddingRight="20dp"/>
+                    
+                    <TextView 
+                    android:id="@+id/card999"
+	                android:layout_height="wrap_content"
+	                android:layout_width="wrap_content"
+	                style="@style/LowText"
+	                android:paddingLeft="20dp"
+	                android:paddingRight="20dp"/>
+                    
+                </LinearLayout>
+                
+                
+                
+            </LinearLayout>
+            
+            
+            
+    	</HorizontalScrollView>
+    	
+        <EditText 
+            android:id="@+id/getNumInput"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="17dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginTop="27dp"
+            android:layout_weight="1"
+            android:inputType="number"/>
+        
+        
+        <Button
+            android:id="@+id/getCardsButton"
+            android:layout_width="fill_parent"
+            android:layout_height="176dp"
+            android:layout_marginLeft="17dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginTop="27dp"
+            android:layout_weight="1"
+            android:text="Get Top Cards" />
+        
+        
+        
+        
+    </LinearLayout>
+    
+
+</ScrollView>
