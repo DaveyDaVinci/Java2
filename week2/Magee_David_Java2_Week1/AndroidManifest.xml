@@ -25,6 +25,7 @@
             </intent-filter>
         </activity>
         <service android:name="URLService"></service>
+        <provider android:name="CardProvider" android:exported="true" android:authorities='com.example.magee_david_java2_week1.cardprovider'></provider>
     </application>
 
 </manifest>

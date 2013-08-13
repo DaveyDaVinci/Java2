@@ -13,6 +13,7 @@ import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.database.Cursor;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -27,9 +28,12 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 import connectionwork.ConnectionWork;
+import com.example.magee_david_java2_week1.CardProvider;
 
 public class MainActivity extends Activity {
 
+	
+	static EditText uriEditText;
 	
 	
 	static TextView cardName;
@@ -56,6 +60,7 @@ public class MainActivity extends Activity {
 	static JSONArray theArray;
 	
 	
+	
 	static String[] arrayOfCardNames = null;
 	
 	static Boolean connection = false;
@@ -75,7 +80,13 @@ public class MainActivity extends Activity {
 		cardPrice = (TextView) findViewById(R.id.cardPrice);
 		cardAverage = (TextView) findViewById(R.id.cardAverage);
 		
+		uriEditText = (EditText) findViewById(R.id.uriSearchText);
+		uriEditText.setText(CardProvider.CardData.ALL_CONTENT.toString());
 		
+		if (savedInstanceState != null)
+		{
+			
+		}
 		
 		
 		//BOOL TEST TO SEE IF CONNECTION IS AVAILABLE
@@ -134,6 +145,18 @@ public class MainActivity extends Activity {
 				
 				
 				
+				
+				
+				Cursor theCursor = CardProvider.query(CardProvider.CardData.CONTENT_URI, CardProvider.CardData.PROJECTION, null, null, null);
+				
+				
+				
+				
+				
+				
+				
+				
+				
 				int selectedButton = loadedCards.getCheckedRadioButtonId();
 				RadioButton selectedRadioButton = (RadioButton) loadedCards.findViewById(selectedButton);
 				
@@ -142,6 +165,7 @@ public class MainActivity extends Activity {
 				String selectedString = Integer.toString(index);
 				
 				Log.i("Selected", selectedString);
+				
 				
 				
 				try {
@@ -302,6 +326,8 @@ public class MainActivity extends Activity {
 			}
 			
 		}
+		
+		
 		
 		
 		
