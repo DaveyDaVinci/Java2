@@ -32,8 +32,11 @@ import connectionwork.ConnectionWork;
 
 public class MainActivity extends Activity {
 
+
 	
 	static EditText uriEditText;
+	
+	static String insertedText;
 	
 	static TextView cardName0;
 	static TextView cardName1;
@@ -53,7 +56,7 @@ public class MainActivity extends Activity {
 	
 	static RadioGroup loadedCards;
 	
-	
+	static int testInt;
 	
 	static JSONArray theArray;
 	
@@ -158,9 +161,11 @@ public class MainActivity extends Activity {
 				Log.i("LengthTest", Integer.toString(test));
 				
 				
-				
+				//This sets up a uri and sends it through the cursor.  Then populates an array of names and prices.  
 				if (test == 0)
 				{
+					testInt = 1;
+					
 					Uri uri = Uri.parse("content://com.example.magee_david_java2_week1.cardprovider/cards");
 					
 					Cursor theCursor = getContentResolver().query(uri, null, null, null, null);
@@ -169,6 +174,7 @@ public class MainActivity extends Activity {
 					
 					priceList = new ArrayList<String>();
 					
+					//Runs through the cursor to pull out the data
 					if (theCursor.moveToFirst() == true)
 					{
 						for (int i = 0; i < theCursor.getCount(); i++)
@@ -193,6 +199,7 @@ public class MainActivity extends Activity {
 					
 					Log.i("Derp", theTest);
 					
+					//Sets the text of the cardnames to the names fromt he list
 					cardName0.setText(nameList.get(0));
 					cardName1.setText(nameList.get(1));
 					cardName2.setText(nameList.get(2));
@@ -212,58 +219,75 @@ public class MainActivity extends Activity {
 				
 				else
 				{
+					
+					
+					//This checks to see if an individual card is being searched. 
+					testInt = 2;
+					
 					String cardNameEntered = uriEditText.getText().toString();
+					
+					insertedText = cardNameEntered;
 					
 					Uri uri = Uri.parse("content://com.example.magee_david_java2_week1.cardprovider/cards/names/" + cardNameEntered);
 					
 					Cursor theCursor = getContentResolver().query(uri, null, null, null, null);
 					
-					nameList = new ArrayList<String>();
-					
-					priceList = new ArrayList<String>();
-					
-					
-					
-					
-					if (theCursor.moveToFirst() == true)
+					if (theCursor.getCount() > 0)
 					{
-						for (int i = 0; i < theCursor.getCount(); i++)
+						nameList = new ArrayList<String>();
+						
+						priceList = new ArrayList<String>();
+						
+						
+						
+						//Sorts through the cursor data to find one
+						if (theCursor.moveToFirst() == true)
 						{
-							
-							
-							String name = theCursor.getString(1);
-							String price = theCursor.getString(2);
-							
-							
-							nameList.add(name);
-							priceList.add(price);
-							
-							
-							theCursor.moveToNext();
-							
-							
+							for (int i = 0; i < theCursor.getCount(); i++)
+							{
+								
+								
+								String name = theCursor.getString(1);
+								String price = theCursor.getString(2);
+								
+								
+								nameList.add(name);
+								priceList.add(price);
+								
+								
+								theCursor.moveToNext();
+								
+								
+							}
 						}
-					}
 
+						
+						String theTest = nameList.get(0);
+						
+						Log.i("Derp", theTest);
+						
+						cardName0.setText(nameList.get(0));
+						cardName1.setText("");
+						cardName2.setText("");
+						cardName3.setText("");
+						cardName4.setText("");
+						
+						cardPrice0.setText(priceList.get(0));
+						cardPrice1.setText("");
+						cardPrice2.setText("");
+						cardPrice3.setText("");
+						cardPrice4.setText("");
+					}
 					
-					String theTest = nameList.get(0);
-					
-					Log.i("Derp", theTest);
-					
-					cardName0.setText(nameList.get(0));
-					cardName1.setText("");
-					cardName2.setText("");
-					cardName3.setText("");
-					cardName4.setText("");
-					
-					cardPrice0.setText(priceList.get(0));
-					cardPrice1.setText("");
-					cardPrice2.setText("");
-					cardPrice3.setText("");
-					cardPrice4.setText("");
+					else
+					{
+						Toast newToast = Toast.makeText(context, "Please enter a valid card name",  Toast.LENGTH_SHORT);
+						newToast.show();
+					}
 					
 					
-					//onSaveInstanceState(savedInstanceState);
+					
+					
 				}
 				
 				
@@ -272,9 +296,50 @@ public class MainActivity extends Activity {
 			}
 		});
 		
-		
-		
-		
+		//This will add items into the savedInstanceState if the arrays exist. 
+		//Uses test int to determine whether or not it's running the first URI or the second.  
+		if (nameList != null && priceList != null && !nameList.isEmpty() && !priceList.isEmpty())
+		{
+			
+			
+			if (testInt == 1)
+			{
+				savedInstanceState.putString("card0", nameList.get(0));
+				savedInstanceState.putString("card1", nameList.get(1));
+				savedInstanceState.putString("card2", nameList.get(2));
+				savedInstanceState.putString("card3", nameList.get(3));
+				savedInstanceState.putString("card4", nameList.get(4));
+				
+				savedInstanceState.putString("price0", priceList.get(0));
+				savedInstanceState.putString("price1", priceList.get(1));
+				savedInstanceState.putString("price2", priceList.get(2));
+				savedInstanceState.putString("price3", priceList.get(3));
+				savedInstanceState.putString("price4", priceList.get(4));
+			}
+			
+			
+			else if (testInt == 2)
+			{
+				savedInstanceState.putString("edittext", insertedText);
+				
+				
+				
+				savedInstanceState.putString("card0", nameList.get(0));
+				savedInstanceState.putString("card1", "");
+				savedInstanceState.putString("card2", "");
+				savedInstanceState.putString("card3", "");
+				savedInstanceState.putString("card4", "");
+				
+				savedInstanceState.putString("price0", priceList.get(0));
+				savedInstanceState.putString("price1", "");
+				savedInstanceState.putString("price2", "");
+				savedInstanceState.putString("price3", "");
+				savedInstanceState.putString("price4", "");
+			}
+			
+			
+			onSaveInstanceState(savedInstanceState);
+		}
 	}
 	
 	
@@ -404,10 +469,29 @@ public class MainActivity extends Activity {
 			super.onSaveInstanceState(outState);
 		}
 		
+		//This grabs the data on restoreinstancestate.  
 		@Override
 		public void onRestoreInstanceState(Bundle savedInstanceState)
 		{
 			super.onRestoreInstanceState(savedInstanceState);
+			
+			if (savedInstanceState.getString("eddittext") != null)
+			{
+				uriEditText.setText(savedInstanceState.getString("edittext"));
+			}
+			
+			
+			
+			cardName0.setText(savedInstanceState.getString("card0"));
+			cardName1.setText(savedInstanceState.getString("card1"));
+			cardName2.setText(savedInstanceState.getString("card2"));
+			cardName3.setText(savedInstanceState.getString("card3"));
+			cardName4.setText(savedInstanceState.getString("card4"));
+			cardPrice0.setText(savedInstanceState.getString("price0"));
+			cardPrice1.setText(savedInstanceState.getString("price1"));
+			cardPrice2.setText(savedInstanceState.getString("price2"));
+			cardPrice3.setText(savedInstanceState.getString("price3"));
+			cardPrice4.setText(savedInstanceState.getString("price4"));
 		}
 		
 		
