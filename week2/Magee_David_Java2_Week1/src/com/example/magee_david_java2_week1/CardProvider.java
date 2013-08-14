@@ -17,6 +17,7 @@ public class CardProvider extends ContentProvider{
 	public static final String AUTHORITY = "com.example.magee_david_java2_week1.cardprovider";
 	
 	
+	//Custom class that holds content
 	public static class CardData implements BaseColumns {
 		public static final Uri CONTENT_URI = Uri.parse("content://" + AUTHORITY + "/cards");
 		
@@ -40,7 +41,7 @@ public class CardProvider extends ContentProvider{
 	
 	
 	
-	
+	//Adds URI
 	static {
 		theMatcher.addURI(AUTHORITY, "cards/", ALLCARDS);
 		theMatcher.addURI(AUTHORITY, "cards/names/*", CARDNAMES);
@@ -59,7 +60,7 @@ public class CardProvider extends ContentProvider{
 	
 	
 	
-	
+	//Grabs the type entered through the matcher
 	@Override
 	public String getType(Uri uri) {
 		// TODO Auto-generated method stub
@@ -95,7 +96,8 @@ public class CardProvider extends ContentProvider{
 
 	
 	
-	
+	//This is the query method that actually grabs the URI and checks it against the matcher.  THen 
+	//filters out the data according to the URI 
 	@Override
 	public Cursor query(Uri uri, String[] projection, String selection,
 			String[] selectionArgs, String sortOrder) {
@@ -137,6 +139,8 @@ public class CardProvider extends ContentProvider{
 			}
 		break;
 			
+		
+		//This one checks for a card name entered
 		case CARDNAMES:
 			
 			String cardNameRequest = uri.getLastPathSegment();
@@ -151,6 +155,7 @@ public class CardProvider extends ContentProvider{
 					{
 						result.addRow(new Object[]{ i + 1, results.get("name"), results.get("price")});
 					}
+					
 				} catch (JSONException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();

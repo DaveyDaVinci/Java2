@@ -11,98 +11,8 @@
         
         <EditText 
             android:id="@+id/uriSearchText"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
-        
-        <RadioGroup 
-            android:id="@+id/radioGroup"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-            <RadioButton 
-                android:id="@+id/button0"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
-            <RadioButton 
-                android:id="@+id/button1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
-            <RadioButton 
-                android:id="@+id/button2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
-            <RadioButton 
-                android:id="@+id/button3"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
-            <RadioButton 
-                android:id="@+id/button4"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
-            <RadioButton 
-                android:id="@+id/button5"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
-            <RadioButton 
-                android:id="@+id/button6"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
-            <RadioButton 
-                android:id="@+id/button7"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
-            <RadioButton 
-                android:id="@+id/button8"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
-            <RadioButton 
-                android:id="@+id/button9"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
-        </RadioGroup>
-        
-        <TextView 
-            android:id="@+id/cardName"
-            android:layout_height="wrap_content"
-            android:layout_width="wrap_content"
-            android:layout_marginTop="20dp"
-            android:layout_marginLeft="20dp"
-            android:paddingRight="20dp"
-            style="@style/CardText"/>
-        
-        <TextView 
-            android:id="@+id/cardPrice"
-            android:layout_height="wrap_content"
-            android:layout_width="wrap_content"
-            android:paddingLeft="40dp"
-            android:paddingRight="20dp"
-            style="@style/PriceText"/>
-               
-        <TextView 
-        	android:id="@+id/cardHigh"
-            android:layout_height="wrap_content"
-            android:layout_width="wrap_content"
-            android:paddingLeft="40dp"
-            android:paddingRight="20dp"
-            style="@style/HighText"/>
-               
-        <TextView 
-            android:id="@+id/cardLow"
-            android:layout_height="wrap_content"
-            android:layout_width="wrap_content"
-            android:paddingLeft="40dp"
-            android:paddingRight="20dp"
-            style="@style/LowText"/>
-        
-        <TextView 
-            android:id="@+id/cardAverage"
-            android:layout_height="wrap_content"
-            android:layout_width="wrap_content"
-            android:paddingLeft="40dp"
-            android:paddingRight="20dp"
-            style="@style/AverageText"/>
-        
-        
         
         
         <Button
@@ -116,9 +26,104 @@
             android:text="Get Top Cards" />
         
         
+        <LinearLayout 
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
         
+        	<LinearLayout 
+        	    android:layout_width="wrap_content"
+        	    android:layout_height="wrap_content"
+        	    android:orientation="vertical">
+        	    
+        	    <TextView
+        	        android:layout_width="wrap_content"
+        	        android:layout_height="wrap_content"
+        	        android:text="Card Names"
+        	        />
+        	    
+        	    <TextView
+        	        android:id="@+id/CardName0"
+        	        android:layout_width="wrap_content"
+        	        android:layout_height="wrap_content"
+        	        />
+        	    
+        	    <TextView
+        	        android:id="@+id/CardName1"
+        	        android:layout_width="wrap_content"
+        	        android:layout_height="wrap_content"
+        	        />
+        	    
+        	    <TextView
+        	        android:id="@+id/CardName2"
+        	        android:layout_width="wrap_content"
+        	        android:layout_height="wrap_content"
+        	        />
+        	    
+        	    <TextView
+        	        android:id="@+id/CardName3"
+        	        android:layout_width="wrap_content"
+        	        android:layout_height="wrap_content"
+        	        />
+        	    
+        	    <TextView
+        	        android:id="@+id/CardName4"
+        	        android:layout_width="wrap_content"
+        	        android:layout_height="wrap_content"
+        	        />
+        	    
+        	</LinearLayout>
+        	
+        	<LinearLayout 
+        	    android:layout_width="wrap_content"
+        	    android:layout_height="wrap_content"
+        	    android:layout_marginLeft="30dp"
+        	    android:orientation="vertical">
+        	    
+        	    <TextView
+        	        android:layout_width="wrap_content"
+        	        android:layout_height="wrap_content"
+        	        android:text="Card Prices"
+        	        />
+        	    
+        	    <TextView
+        	        android:id="@+id/CardPrice0"
+        	        android:layout_width="wrap_content"
+        	        android:layout_height="wrap_content"
+        	        />
+        	    
+        	    <TextView
+        	        android:id="@+id/CardPrice1"
+        	        android:layout_width="wrap_content"
+        	        android:layout_height="wrap_content"
+        	        />
+        	    
+        	    <TextView
+        	        android:id="@+id/CardPrice2"
+        	        android:layout_width="wrap_content"
+        	        android:layout_height="wrap_content"
+        	        />
+        	    
+        	    <TextView
+        	        android:id="@+id/CardPrice3"
+        	        android:layout_width="wrap_content"
+        	        android:layout_height="wrap_content"
+        	        />
+        	    
+        	    <TextView
+        	        android:id="@+id/CardPrice4"
+        	        android:layout_width="wrap_content"
+        	        android:layout_height="wrap_content"
+        	        />
+        	    
+        	</LinearLayout>
+        
+        
+    	</LinearLayout>
         
     </LinearLayout>
+    
+    
     
 
 </ScrollView>

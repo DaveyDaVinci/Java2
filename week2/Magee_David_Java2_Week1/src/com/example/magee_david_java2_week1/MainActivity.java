@@ -4,6 +4,7 @@ package com.example.magee_david_java2_week1;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLEncoder;
+import java.util.ArrayList;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -14,6 +15,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -23,39 +25,35 @@ import android.view.Menu;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 import connectionwork.ConnectionWork;
-import com.example.magee_david_java2_week1.CardProvider;
 
 public class MainActivity extends Activity {
 
 	
 	static EditText uriEditText;
 	
+	static TextView cardName0;
+	static TextView cardName1;
+	static TextView cardName2;
+	static TextView cardName3;
+	static TextView cardName4;
+	static TextView cardPrice0;
+	static TextView cardPrice1;
+	static TextView cardPrice2;
+	static TextView cardPrice3;
+	static TextView cardPrice4;
 	
-	static TextView cardName;
-	static TextView cardHigh;
-	static TextView cardLow;
-	static TextView cardPrice;
-	static TextView cardAverage;
+	static ArrayList<String> nameList;
+	static ArrayList<String> priceList;
 	
 	static EditText numberInput;
 	
 	static RadioGroup loadedCards;
 	
-	static RadioButton button0;
-	static RadioButton button1;
-	static RadioButton button2;
-	static RadioButton button3;
-	static RadioButton button4;
-	static RadioButton button5;
-	static RadioButton button6;
-	static RadioButton button7;
-	static RadioButton button8;
-	static RadioButton button9;
+	
 	
 	static JSONArray theArray;
 	
@@ -74,19 +72,23 @@ public class MainActivity extends Activity {
 		context = this;
 		
 		
-		cardName = (TextView) findViewById(R.id.cardName);
-		cardHigh = (TextView) findViewById(R.id.cardHigh);
-		cardLow = (TextView) findViewById(R.id.cardLow);
-		cardPrice = (TextView) findViewById(R.id.cardPrice);
-		cardAverage = (TextView) findViewById(R.id.cardAverage);
+		
 		
 		uriEditText = (EditText) findViewById(R.id.uriSearchText);
-		uriEditText.setText(CardProvider.CardData.ALL_CONTENT.toString());
 		
-		if (savedInstanceState != null)
-		{
-			
-		}
+		cardName0 = (TextView) findViewById(R.id.CardName0);
+		cardName1 = (TextView) findViewById(R.id.CardName1);
+		cardName2 = (TextView) findViewById(R.id.CardName2);
+		cardName3 = (TextView) findViewById(R.id.CardName3);
+		cardName4 = (TextView) findViewById(R.id.CardName4);
+		cardPrice0 = (TextView) findViewById(R.id.CardPrice0);
+		cardPrice1 = (TextView) findViewById(R.id.CardPrice1);
+		cardPrice2 = (TextView) findViewById(R.id.CardPrice2);
+		cardPrice3 = (TextView) findViewById(R.id.CardPrice3);
+		cardPrice4 = (TextView) findViewById(R.id.CardPrice4);
+		
+		
+		
 		
 		
 		//BOOL TEST TO SEE IF CONNECTION IS AVAILABLE
@@ -103,7 +105,6 @@ public class MainActivity extends Activity {
 		
 		
 		
-		loadedCards = (RadioGroup) findViewById(R.id.radioGroup);
 		
 		
 		
@@ -135,6 +136,16 @@ public class MainActivity extends Activity {
 		
 		
 		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
 		Button getJokesButton = (Button) findViewById(R.id.getCardsButton);
 		getJokesButton.setOnClickListener(new View.OnClickListener() {
 					
@@ -142,46 +153,126 @@ public class MainActivity extends Activity {
 			//Gets joke
 			public void onClick(View v) {
 				
+				int test = uriEditText.getText().toString().length();
+				
+				Log.i("LengthTest", Integer.toString(test));
 				
 				
 				
-				
-				
-				Cursor theCursor = CardProvider.query(CardProvider.CardData.CONTENT_URI, CardProvider.CardData.PROJECTION, null, null, null);
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				int selectedButton = loadedCards.getCheckedRadioButtonId();
-				RadioButton selectedRadioButton = (RadioButton) loadedCards.findViewById(selectedButton);
-				
-				int index = loadedCards.indexOfChild(selectedRadioButton);
-				
-				String selectedString = Integer.toString(index);
-				
-				Log.i("Selected", selectedString);
-				
-				
-				
-				try {
-					cardName.setText(theArray.getJSONObject(index).getString("name"));
-					cardPrice.setText("Price:  " + theArray.getJSONObject(index).getString("price"));
-					cardHigh.setText("High:  " + theArray.getJSONObject(index).getString("high"));
-					cardLow.setText("Low:  " + theArray.getJSONObject(index).getString("low"));
-					cardAverage.setText("Average:  " + theArray.getJSONObject(index).getString("average"));
-				} catch (JSONException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
+				if (test == 0)
+				{
+					Uri uri = Uri.parse("content://com.example.magee_david_java2_week1.cardprovider/cards");
+					
+					Cursor theCursor = getContentResolver().query(uri, null, null, null, null);
+					
+					nameList = new ArrayList<String>();
+					
+					priceList = new ArrayList<String>();
+					
+					if (theCursor.moveToFirst() == true)
+					{
+						for (int i = 0; i < theCursor.getCount(); i++)
+						{
+							String name = theCursor.getString(1);
+							String price = theCursor.getString(2);
+							
+							
+							nameList.add(name);
+							priceList.add(price);
+							
+							
+							theCursor.moveToNext();
+							
+							
+						}
+					}
+					
+					//Log.i("derp", arrayList.get(3));
+					
+					String theTest = nameList.get(0);
+					
+					Log.i("Derp", theTest);
+					
+					cardName0.setText(nameList.get(0));
+					cardName1.setText(nameList.get(1));
+					cardName2.setText(nameList.get(2));
+					cardName3.setText(nameList.get(3));
+					cardName4.setText(nameList.get(4));
+					
+					cardPrice0.setText(priceList.get(0));
+					cardPrice1.setText(priceList.get(1));
+					cardPrice2.setText(priceList.get(2));
+					cardPrice3.setText(priceList.get(3));
+					cardPrice4.setText(priceList.get(4));
+					
+					
+					
+					
 				}
 				
-						
+				else
+				{
+					String cardNameEntered = uriEditText.getText().toString();
+					
+					Uri uri = Uri.parse("content://com.example.magee_david_java2_week1.cardprovider/cards/names/" + cardNameEntered);
+					
+					Cursor theCursor = getContentResolver().query(uri, null, null, null, null);
+					
+					nameList = new ArrayList<String>();
+					
+					priceList = new ArrayList<String>();
+					
+					
+					
+					
+					if (theCursor.moveToFirst() == true)
+					{
+						for (int i = 0; i < theCursor.getCount(); i++)
+						{
+							
+							
+							String name = theCursor.getString(1);
+							String price = theCursor.getString(2);
+							
+							
+							nameList.add(name);
+							priceList.add(price);
+							
+							
+							theCursor.moveToNext();
+							
+							
+						}
+					}
+
+					
+					String theTest = nameList.get(0);
+					
+					Log.i("Derp", theTest);
+					
+					cardName0.setText(nameList.get(0));
+					cardName1.setText("");
+					cardName2.setText("");
+					cardName3.setText("");
+					cardName4.setText("");
+					
+					cardPrice0.setText(priceList.get(0));
+					cardPrice1.setText("");
+					cardPrice2.setText("");
+					cardPrice3.setText("");
+					cardPrice4.setText("");
+					
+					
+					//onSaveInstanceState(savedInstanceState);
+				}
+				
+				
+				
+							
 			}
 		});
+		
+		
 		
 		
 	}
@@ -298,27 +389,6 @@ public class MainActivity extends Activity {
 				Log.i("test", lengthString);
 				
 				
-				button0 = (RadioButton) findViewById(R.id.button0);
-				button0.setText(theArray.getJSONObject(0).getString("name"));
-				button1 = (RadioButton) findViewById(R.id.button1);
-				button1.setText(theArray.getJSONObject(1).getString("name"));
-				button2 = (RadioButton) findViewById(R.id.button2);
-				button2.setText(theArray.getJSONObject(2).getString("name"));
-				button3 = (RadioButton) findViewById(R.id.button3);
-				button3.setText(theArray.getJSONObject(3).getString("name"));
-				button4 = (RadioButton) findViewById(R.id.button4);
-				button4.setText(theArray.getJSONObject(4).getString("name"));
-				button5 = (RadioButton) findViewById(R.id.button5);
-				button5.setText(theArray.getJSONObject(5).getString("name"));
-				button6 = (RadioButton) findViewById(R.id.button6);
-				button6.setText(theArray.getJSONObject(6).getString("name"));
-				button7 = (RadioButton) findViewById(R.id.button7);
-				button7.setText(theArray.getJSONObject(7).getString("name"));
-				button8 = (RadioButton) findViewById(R.id.button8);
-				button8.setText(theArray.getJSONObject(8).getString("name"));
-				button9 = (RadioButton) findViewById(R.id.button9);
-				button9.setText(theArray.getJSONObject(9).getString("name"));
-				
 				
 			} catch (JSONException e) {
 				// TODO Auto-generated catch block
@@ -328,7 +398,17 @@ public class MainActivity extends Activity {
 		}
 		
 		
+		@Override
+		public void onSaveInstanceState(Bundle outState)
+		{
+			super.onSaveInstanceState(outState);
+		}
 		
+		@Override
+		public void onRestoreInstanceState(Bundle savedInstanceState)
+		{
+			super.onRestoreInstanceState(savedInstanceState);
+		}
 		
 		
 		
