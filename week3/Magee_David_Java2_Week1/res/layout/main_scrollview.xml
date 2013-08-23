@@ -15,6 +15,12 @@
             android:layout_height="wrap_content"
             android:hint="Leave blank for all cards, or enter a card name to see price"/>
         
+        <TextView 
+            android:id="@+id/testTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:linksClickable="true"
+            android:autoLink="web"/>
         
         <Button
             android:id="@+id/getCardsButton"

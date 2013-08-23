@@ -20,6 +20,8 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.os.Messenger;
+import android.text.Html;
+import android.text.method.LinkMovementMethod;
 import android.util.Log;
 import android.view.Menu;
 import android.view.View;
@@ -37,6 +39,10 @@ public class MainActivity extends Activity {
 	static EditText uriEditText;
 	
 	static String insertedText;
+	
+	static String selectedName;
+	static String selectedPrice;
+	static String selectedURL;
 	
 	static TextView cardName0;
 	static TextView cardName1;
@@ -143,6 +149,9 @@ public class MainActivity extends Activity {
 		
 		
 		
+		
+		
+		
 		Button testButton = (Button) findViewById(R.id.testButton);
 		testButton.setOnClickListener(new View.OnClickListener() {
 			
@@ -150,12 +159,23 @@ public class MainActivity extends Activity {
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
 				
-				Intent nextActivity = new Intent(context, DetailsActivity.class);
-				
-				Intent webView = new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.wikipedia.org/"));
-				
-				startActivity(webView);
-				
+				if (selectedName != null && !selectedName.isEmpty() && selectedPrice != null && !selectedPrice.isEmpty()
+						 && selectedURL != null && !selectedURL.isEmpty())
+				{
+					Intent detailsActivity = new Intent(context, DetailsActivity.class);
+					
+					//Intent webView = new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.wikipedia.org/"));
+					detailsActivity.putExtra("cardName", selectedName);
+					
+					detailsActivity.putExtra("cardPrice", selectedPrice);
+					detailsActivity.putExtra("cardURL", selectedURL);
+					startActivity(detailsActivity);
+				}
+				else
+				{
+					Toast newToast = Toast.makeText(context, "Please search for a valid card before continuing on",  Toast.LENGTH_SHORT);
+					newToast.show();
+				}
 			}
 		});
 		
@@ -204,7 +224,7 @@ public class MainActivity extends Activity {
 							priceList.add(price);
 							urlList.add(url);
 							
-							Log.i("URL", url);
+							
 							
 							theCursor.moveToNext();
 							
@@ -212,12 +232,10 @@ public class MainActivity extends Activity {
 						}
 					}
 					
-					//Log.i("derp", arrayList.get(3));
 					
-					String theTest = nameList.get(0);
-					
-					Log.i("Derp", theTest);
-					
+					selectedName = nameList.get(0);
+					selectedPrice = priceList.get(0);
+					selectedURL = urlList.get(0);
 					//Sets the text of the cardnames to the names fromt he list
 					cardName0.setText(nameList.get(0));
 					cardName1.setText(nameList.get(1));
@@ -257,7 +275,7 @@ public class MainActivity extends Activity {
 						
 						priceList = new ArrayList<String>();
 						
-						
+						urlList = new ArrayList<String>();
 						
 						//Sorts through the cursor data to find one
 						if (theCursor.moveToFirst() == true)
@@ -268,10 +286,11 @@ public class MainActivity extends Activity {
 								
 								String name = theCursor.getString(1);
 								String price = theCursor.getString(2);
-								
+								String url = theCursor.getString(3);
 								
 								nameList.add(name);
 								priceList.add(price);
+								urlList.add(url);
 								
 								
 								theCursor.moveToNext();
@@ -281,21 +300,22 @@ public class MainActivity extends Activity {
 						}
 
 						
-						String theTest = nameList.get(0);
 						
-						Log.i("Derp", theTest);
-						
+						selectedName = nameList.get(0);
 						cardName0.setText(nameList.get(0));
 						cardName1.setText("");
 						cardName2.setText("");
 						cardName3.setText("");
 						cardName4.setText("");
 						
+						selectedPrice = priceList.get(0);
 						cardPrice0.setText(priceList.get(0));
 						cardPrice1.setText("");
 						cardPrice2.setText("");
 						cardPrice3.setText("");
 						cardPrice4.setText("");
+						
+						selectedURL = urlList.get(0);
 					}
 					
 					else

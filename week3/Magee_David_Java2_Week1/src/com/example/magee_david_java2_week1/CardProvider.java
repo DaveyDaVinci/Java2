@@ -28,8 +28,10 @@ public class CardProvider extends ContentProvider{
 		public static final String CARD_NAME_COLUMN = "Card";
 		public static final String CARD_PRICE_COLUMN = "Price";
 		public static final String CARD_URL = "Url";
+		public static final String CARD_HIGH = "High";
+		public static final String CARD_LOW = "Low";
 		
-		public static final String[] PROJECTION = {"_Id", CARD_NAME_COLUMN, CARD_PRICE_COLUMN, CARD_URL};
+		public static final String[] PROJECTION = {"_Id", CARD_NAME_COLUMN, CARD_PRICE_COLUMN, CARD_URL, CARD_HIGH, CARD_LOW};
 		
 		private CardData() {};
 	}
@@ -132,7 +134,8 @@ public class CardProvider extends ContentProvider{
 			{
 				try {
 					results = cardsArray.getJSONObject(i);
-					result.addRow(new Object[]{ i + 1, results.get("name"), results.get("price"), results.get("url")});
+					result.addRow(new Object[]{ i + 1, results.get("name"), results.get("price"), 
+							results.get("url"), results.get("high"), results.get("low")});
 				} catch (JSONException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -154,7 +157,8 @@ public class CardProvider extends ContentProvider{
 					
 					if (results.getString("name").contentEquals(cardNameRequest))
 					{
-						result.addRow(new Object[]{ i + 1, results.get("name"), results.get("price"), results.get("url")});
+						result.addRow(new Object[]{ i + 1, results.get("name"), results.get("price"), results.get("url")
+								, results.get("high"), results.get("low")});
 					}
 					
 				} catch (JSONException e) {
