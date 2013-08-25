@@ -28,27 +28,26 @@ public final class R {
         public static final int mtgsymbols=0x7f020004;
     }
     public static final class id {
-        public static final int CardName0=0x7f08000a;
-        public static final int CardName1=0x7f08000b;
-        public static final int CardName2=0x7f08000c;
-        public static final int CardName3=0x7f08000d;
-        public static final int CardName4=0x7f08000e;
-        public static final int CardPrice0=0x7f08000f;
-        public static final int CardPrice1=0x7f080010;
-        public static final int CardPrice2=0x7f080011;
-        public static final int CardPrice3=0x7f080012;
-        public static final int CardPrice4=0x7f080013;
-        public static final int action_settings=0x7f080015;
+        public static final int CardName0=0x7f080009;
+        public static final int CardName1=0x7f08000a;
+        public static final int CardName2=0x7f08000b;
+        public static final int CardName3=0x7f08000c;
+        public static final int CardName4=0x7f08000d;
+        public static final int CardPrice0=0x7f08000e;
+        public static final int CardPrice1=0x7f08000f;
+        public static final int CardPrice2=0x7f080010;
+        public static final int CardPrice3=0x7f080011;
+        public static final int CardPrice4=0x7f080012;
+        public static final int action_settings=0x7f080014;
         public static final int cardHigh=0x7f080003;
         public static final int cardLow=0x7f080004;
         public static final int cardName=0x7f080000;
         public static final int cardPrice=0x7f080001;
         public static final int cardURL=0x7f080002;
-        public static final int getCardsButton=0x7f080009;
-        public static final int goBackButton=0x7f080006;
-        public static final int testButton=0x7f080014;
-        public static final int testTextView=0x7f080008;
-        public static final int uriSearchText=0x7f080007;
+        public static final int getCardsButton=0x7f080008;
+        public static final int testButton=0x7f080013;
+        public static final int testTextView=0x7f080007;
+        public static final int uriSearchText=0x7f080006;
         public static final int webPageButton=0x7f080005;
     }
     public static final class layout {

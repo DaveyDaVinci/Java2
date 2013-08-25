@@ -6,7 +6,6 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.widget.Button;
@@ -25,6 +24,7 @@ public class DetailsActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.details_list);
 		
+		//Grabs the data stored in the intent and sets variables with it
 		context = this;
 		retrievedData = getIntent().getExtras();
 		if (retrievedData != null)
@@ -48,6 +48,7 @@ public class DetailsActivity extends Activity {
 			TextView cardLowText = (TextView) findViewById(R.id.cardLow);
 			
 			
+			//Searches through the provider to pull additional content
 			Uri uri = Uri.parse("content://com.example.magee_david_java2_week1.cardprovider/cards/names/" + cardName);
 			
 			Cursor theCursor = getContentResolver().query(uri, null, null, null, null);
@@ -70,6 +71,7 @@ public class DetailsActivity extends Activity {
 		}
 		
 		
+		//STarts web activity
 		Button webPageButton = (Button) findViewById(R.id.webPageButton);
 		webPageButton.setOnClickListener(new View.OnClickListener() {
 			
@@ -85,24 +87,7 @@ public class DetailsActivity extends Activity {
 			}
 		});
 		
-		Button goBackButton = (Button) findViewById(R.id.goBackButton);
-		goBackButton.setOnClickListener(new View.OnClickListener() {
-			
-			@Override
-			public void onClick(View v) {
-				// TODO Auto-generated method stub
-				
-				if (cardName != null && !cardName.isEmpty() && cardPrice != null && !cardPrice.isEmpty())
-				{
-					Intent newIntent = new Intent(context, MainActivity.class);
-					newIntent.putExtra("cardname", cardName);
-					newIntent.putExtra("cardprice", cardPrice);
-					
-					startActivity(newIntent);
-				}
-				
-			}
-		});
+		
 		
 	}
 

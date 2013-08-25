@@ -44,12 +44,7 @@
               android:layout_height="wrap_content"
               android:text="Visit Card Site"/>
           
-          <Button 
-              android:id="@+id/goBackButton"
-              android:layout_width="match_parent"
-              android:layout_height="wrap_content"
-              android:layout_marginTop="30dp"
-              android:text="Go Back"/>
+          
           
     </LinearLayout>
     

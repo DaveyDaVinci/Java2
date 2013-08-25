@@ -157,7 +157,7 @@ public class MainActivity extends Activity {
 		
 		
 		
-		
+		//Starts up the intent to go to the next activity, and puts extras in 
 		Button testButton = (Button) findViewById(R.id.testButton);
 		testButton.setOnClickListener(new View.OnClickListener() {
 			
