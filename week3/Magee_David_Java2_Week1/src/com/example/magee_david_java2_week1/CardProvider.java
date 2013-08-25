@@ -107,7 +107,8 @@ public class CardProvider extends ContentProvider{
 		
 		MatrixCursor result = new MatrixCursor(CardData.PROJECTION);
 		
-		String savedJSONData = SaveClass.readStringData(getContext(), "saveddata");
+		//String savedJSONData = SaveClass.readStringData(getContext(), "saveddata");
+		String savedJSONData = SaveSingleton.readStringData(getContext(), "saveddata");
 		
 		JSONObject theObject = null;
 		JSONArray cardsArray = null;

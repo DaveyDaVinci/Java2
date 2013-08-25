@@ -20,8 +20,6 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.os.Messenger;
-import android.text.Html;
-import android.text.method.LinkMovementMethod;
 import android.util.Log;
 import android.view.Menu;
 import android.view.View;
@@ -35,6 +33,7 @@ import connectionwork.ConnectionWork;
 public class MainActivity extends Activity {
 
 
+	
 	
 	static EditText uriEditText;
 	
@@ -67,7 +66,7 @@ public class MainActivity extends Activity {
 	
 	static JSONArray theArray;
 	
-	
+	static Bundle fromDetailsActivity;
 	
 	static String[] arrayOfCardNames = null;
 	
@@ -98,7 +97,12 @@ public class MainActivity extends Activity {
 		cardPrice4 = (TextView) findViewById(R.id.CardPrice4);
 		
 		
-		
+		fromDetailsActivity = getIntent().getExtras();
+		if (fromDetailsActivity != null)
+		{
+			//cardName0.setText(fromDetailsActivity.getString("cardname"));
+			//cardPrice0.setText(fromDetailsActivity.getString("cardprice"));
+		}
 		
 		
 		//BOOL TEST TO SEE IF CONNECTION IS AVAILABLE
@@ -127,7 +131,9 @@ public class MainActivity extends Activity {
 		else 
 		{
 			
-			String resultsDataString = SaveClass.readStringData(context, "saveddata");
+			//String resultsDataString = SaveClass.readStringData(context, "saveddata");
+			
+			String resultsDataString = SaveSingleton.readStringData(context, "saveddata");
 			
 			if (resultsDataString != null && !resultsDataString.isEmpty() )
 			{
@@ -435,7 +441,8 @@ public class MainActivity extends Activity {
 							resultsData = (String) msg.obj;
 							//parseData(resultsData);
 							
-							String resultsDataString = SaveClass.readStringData(context, "saveddata");
+							//String resultsDataString = SaveClass.readStringData(context, "saveddata");
+							String resultsDataString = SaveSingleton.readStringData(context, "saveddata");
 							
 							parseData(resultsDataString);
 							

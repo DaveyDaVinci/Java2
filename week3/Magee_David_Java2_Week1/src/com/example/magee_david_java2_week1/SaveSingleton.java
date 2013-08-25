@@ -9,7 +9,23 @@ import java.io.IOException;
 
 import android.content.Context;
 
-public class SaveClass {
+public class SaveSingleton {
+	
+	private static SaveSingleton instance = null;
+	
+	protected SaveSingleton()
+	{
+		
+	}
+	
+	public static SaveSingleton getInstance()
+	{
+		if (instance == null)
+		{
+			instance = new SaveSingleton();
+		}
+		return instance;
+	}
 	
 	public static boolean storeJSONStringData(Context context, String filename, String urlContent)
 	{

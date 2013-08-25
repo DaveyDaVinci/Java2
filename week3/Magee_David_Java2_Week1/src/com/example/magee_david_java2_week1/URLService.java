@@ -1,7 +1,6 @@
 package com.example.magee_david_java2_week1;
 import java.net.MalformedURLException;
 import java.net.URL;
-import com.example.magee_david_java2_week1.SaveClass;
 import android.app.Activity;
 import android.app.IntentService;
 import android.content.Intent;
@@ -45,7 +44,9 @@ public class URLService extends IntentService{
 		
 		String resultsString = ConnectionWork.getURLResponse(URLService.finishedURL);
 		
-		SaveClass.storeJSONStringData(this, "saveddata", resultsString);
+		//SaveClass.storeJSONStringData(this, "saveddata", resultsString);
+		
+		SaveSingleton.storeJSONStringData(this, "saveddata", resultsString);
 		
 		message.obj = ConnectionWork.getURLResponse(URLService.finishedURL);
 		try {
