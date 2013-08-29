@@ -106,12 +106,7 @@ public class MainActivity extends Activity implements MainFragment.MainListener,
 		
 		
 		
-		fromDetailsActivity = getIntent().getExtras();
-		if (fromDetailsActivity != null)
-		{
-			//cardName0.setText(fromDetailsActivity.getString("cardname"));
-			//cardPrice0.setText(fromDetailsActivity.getString("cardprice"));
-		}
+		
 		
 		
 		//BOOL TEST TO SEE IF CONNECTION IS AVAILABLE
@@ -389,6 +384,8 @@ public class MainActivity extends Activity implements MainFragment.MainListener,
 		@Override
 		public void onMoreDetailsClick() {
 			// TODO Auto-generated method stub
+			
+			 
 			
 			if (selectedName != null && !selectedName.isEmpty() && selectedPrice != null && !selectedPrice.isEmpty()
 					 && selectedURL != null && !selectedURL.isEmpty())

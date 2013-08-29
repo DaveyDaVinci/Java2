@@ -2,16 +2,19 @@ package com.example.magee_david_java2_week1;
 
 import android.app.Activity;
 import android.app.Fragment;
+import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.ScrollView;
 
 public class MainFragment extends Fragment {
 	
 	private MainListener listener;
+	static Button getJokesButton;
 	
 	public interface MainListener
 	{
@@ -38,12 +41,15 @@ public class MainFragment extends Fragment {
 			}
 		});
 		
-		Button getJokesButton = (Button) view.findViewById(R.id.getCardsButton);
+		getJokesButton = (Button) view.findViewById(R.id.getCardsButton);
 		getJokesButton.setOnClickListener(new View.OnClickListener() {
 					
 			@Override
 			//Gets joke
 			public void onClick(View v) {
+				
+				InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+	             imm.hideSoftInputFromWindow(getJokesButton.getWindowToken(), 0);
 				
 				listener.onGetJSONData();
 								
