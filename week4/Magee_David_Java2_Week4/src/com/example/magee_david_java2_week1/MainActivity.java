@@ -14,6 +14,7 @@ import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
@@ -28,7 +29,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 import connectionwork.ConnectionWork;
 
-public class MainActivity extends Activity implements MainFragment.MainListener {
+public class MainActivity extends Activity implements MainFragment.MainListener, DetailsFragment.DetailsListener {
 
 
 	
@@ -77,6 +78,8 @@ public class MainActivity extends Activity implements MainFragment.MainListener 
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.mainfrag);
 		
+		SaveSingleton.getInstance();
+		
 		context = this;
 		
 		
@@ -94,6 +97,11 @@ public class MainActivity extends Activity implements MainFragment.MainListener 
 		cardPrice2 = (TextView) findViewById(R.id.CardPrice2);
 		cardPrice3 = (TextView) findViewById(R.id.CardPrice3);
 		cardPrice4 = (TextView) findViewById(R.id.CardPrice4);
+		
+		
+		
+		
+		
 		
 		
 		fromDetailsActivity = getIntent().getExtras();
@@ -132,6 +140,7 @@ public class MainActivity extends Activity implements MainFragment.MainListener 
 			
 			//String resultsDataString = SaveClass.readStringData(context, "saveddata");
 			
+			
 			String resultsDataString = SaveSingleton.readStringData(context, "saveddata");
 			
 			if (resultsDataString != null && !resultsDataString.isEmpty() )
@@ -148,23 +157,6 @@ public class MainActivity extends Activity implements MainFragment.MainListener 
 			}
 			
 		}
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
 		//This will add items into the savedInstanceState if the arrays exist. 
 		//Uses test int to determine whether or not it's running the first URI or the second.  
 		if (nameList != null && priceList != null && !nameList.isEmpty() && !priceList.isEmpty())
@@ -374,14 +366,54 @@ public class MainActivity extends Activity implements MainFragment.MainListener 
 			if (selectedName != null && !selectedName.isEmpty() && selectedPrice != null && !selectedPrice.isEmpty()
 					 && selectedURL != null && !selectedURL.isEmpty())
 			{
-				Intent detailsActivity = new Intent(context, DetailsActivity.class);
 				
-				//Intent webView = new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.wikipedia.org/"));
-				detailsActivity.putExtra("cardName", selectedName);
+				int testOrientation = getResources().getConfiguration().orientation;
 				
-				detailsActivity.putExtra("cardPrice", selectedPrice);
-				detailsActivity.putExtra("cardURL", selectedURL);
-				startActivity(detailsActivity);
+				if (testOrientation == Configuration.ORIENTATION_LANDSCAPE)
+				{
+					Toast newToast = Toast.makeText(context, "IS IN LANDSCAPE",  Toast.LENGTH_SHORT);
+					newToast.show();
+					
+					
+					Uri uri = Uri.parse("content://com.example.magee_david_java2_week1.cardprovider/cards/names/" + selectedName);
+					
+					Cursor theCursor = getContentResolver().query(uri, null, null, null, null);
+					
+					if (theCursor.getCount() > 0)
+					{
+						if (theCursor.moveToFirst() == true)
+						{
+							for (int i = 0; i < theCursor.getCount(); i++)
+							{
+								DetailsFragment.nameView.setText(theCursor.getString(1));
+								DetailsFragment.priceView.setText("Price: " + theCursor.getString(2));
+								DetailsFragment.URLView.setText(theCursor.getString(3));
+								DetailsFragment.highView.setText("High: " + theCursor.getString(4));
+								DetailsFragment.lowView.setText("Low: " + theCursor.getString(5));
+								
+								theCursor.moveToNext();
+							};
+						};
+					};
+					
+					DetailsFragment.nameView.setText(selectedName);
+				}
+				else if (testOrientation == Configuration.ORIENTATION_PORTRAIT)
+				{
+					Toast newToast = Toast.makeText(context, "IS IN PORTRAIT",  Toast.LENGTH_SHORT);
+					newToast.show();
+					
+					Intent detailsActivity = new Intent(context, DetailsActivity.class);
+					
+					//Intent webView = new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.wikipedia.org/"));
+					detailsActivity.putExtra("cardName", selectedName);
+					
+					detailsActivity.putExtra("cardPrice", selectedPrice);
+					detailsActivity.putExtra("cardURL", selectedURL);
+					startActivity(detailsActivity);
+				}
+				
+				
 			}
 			else
 			{
@@ -515,6 +547,21 @@ public class MainActivity extends Activity implements MainFragment.MainListener 
 					newToast.show();
 				}
 					
+			}
+			
+		}
+
+
+
+		@Override
+		public void onWebButtonPress() {
+			// TODO Auto-generated method stub
+			
+			if (selectedURL != null && !selectedURL.isEmpty())
+			{
+				Intent webView = new Intent(Intent.ACTION_VIEW, Uri.parse(selectedURL));
+				
+				startActivity(webView);
 			}
 			
 		}

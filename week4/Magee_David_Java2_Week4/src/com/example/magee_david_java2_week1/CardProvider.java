@@ -17,6 +17,8 @@ public class CardProvider extends ContentProvider{
 	public static final String AUTHORITY = "com.example.magee_david_java2_week1.cardprovider";
 	
 	
+	
+	
 	//Custom class that holds content
 	public static class CardData implements BaseColumns {
 		public static final Uri CONTENT_URI = Uri.parse("content://" + AUTHORITY + "/cards");
@@ -106,6 +108,8 @@ public class CardProvider extends ContentProvider{
 			String[] selectionArgs, String sortOrder) {
 		
 		MatrixCursor result = new MatrixCursor(CardData.PROJECTION);
+		
+		SaveSingleton.getInstance();
 		
 		//String savedJSONData = SaveClass.readStringData(getContext(), "saveddata");
 		String savedJSONData = SaveSingleton.readStringData(getContext(), "saveddata");

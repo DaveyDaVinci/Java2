@@ -18,6 +18,11 @@ public class DetailsActivity extends Activity implements DetailsFragment.Details
 	static String cardPrice;
 	static Bundle retrievedData;
 	static Context context;
+	static TextView cardNameText;
+	static TextView cardPriceText;
+	static TextView cardURLText;
+	static TextView cardHighText;
+	static TextView cardLowText;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -34,18 +39,18 @@ public class DetailsActivity extends Activity implements DetailsFragment.Details
 			cardPrice = retrievedData.getString("cardPrice");
 			
 			
-			TextView cardNameText = (TextView) findViewById(R.id.cardName);
+			cardNameText = (TextView) findViewById(R.id.cardName);
 			cardNameText.setText(cardName);
 			
-			TextView cardPriceText = (TextView) findViewById(R.id.cardPrice);
+			cardPriceText = (TextView) findViewById(R.id.cardPrice);
 			cardPriceText.setText("Current Price: " + cardPrice);
 			
-			TextView cardURLText = (TextView) findViewById(R.id.cardURL);
+			cardURLText = (TextView) findViewById(R.id.cardURL);
 			cardURLText.setText(cardURL);
 			
-			TextView cardHighText = (TextView) findViewById(R.id.cardHigh);
+			cardHighText = (TextView) findViewById(R.id.cardHigh);
 			
-			TextView cardLowText = (TextView) findViewById(R.id.cardLow);
+			cardLowText = (TextView) findViewById(R.id.cardLow);
 			
 			
 			//Searches through the provider to pull additional content

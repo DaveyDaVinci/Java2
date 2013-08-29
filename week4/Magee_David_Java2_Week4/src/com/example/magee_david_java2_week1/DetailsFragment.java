@@ -8,9 +8,15 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ScrollView;
+import android.widget.TextView;
 
 public class DetailsFragment extends Fragment {
 	private DetailsListener listener;
+	static TextView nameView;
+	static TextView priceView;
+	static TextView URLView;
+	static TextView highView;
+	static TextView lowView;
 	
 	public interface DetailsListener
 	{
@@ -23,6 +29,12 @@ public class DetailsFragment extends Fragment {
 		super.onCreateView(theInflater, viewContainer, savedInstanceState);
 		
 		ScrollView view = (ScrollView) theInflater.inflate(R.layout.details_list, viewContainer, false);
+		
+		nameView = (TextView) view.findViewById(R.id.cardName);
+		priceView = (TextView) view.findViewById(R.id.cardPrice);
+		URLView = (TextView) view.findViewById(R.id.cardURL);
+		highView = (TextView) view.findViewById(R.id.cardHigh);
+		lowView = (TextView) view.findViewById(R.id.cardLow);
 		
 		Button webPageButton = (Button) view.findViewById(R.id.webPageButton);
 		webPageButton.setOnClickListener(new View.OnClickListener() {
