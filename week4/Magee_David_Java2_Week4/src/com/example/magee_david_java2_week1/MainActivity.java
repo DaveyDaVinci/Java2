@@ -246,6 +246,8 @@ public class MainActivity extends Activity implements MainFragment.MainListener,
 			
 			
 			
+			
+			
 			//TEST HANDLER
 			Handler urlRequestHandler = new Handler(){
 
@@ -363,7 +365,8 @@ public class MainActivity extends Activity implements MainFragment.MainListener,
 			cardPrice3.setText(savedInstanceState.getString("price3"));
 			cardPrice4.setText(savedInstanceState.getString("price4"));
 			
-			if (savedInstanceState.getString("detailsNameCard") != null )
+			if (savedInstanceState.getString("detailsNameCard") != null && 
+					!savedInstanceState.getString("detailsNameCard").isEmpty())
 			{
 				
 				Log.i("Test to see if works", "Success");
