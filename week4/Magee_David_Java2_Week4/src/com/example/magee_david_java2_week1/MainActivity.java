@@ -69,6 +69,8 @@ public class MainActivity extends Activity implements MainFragment.MainListener,
 	
 	static String[] arrayOfCardNames = null;
 	
+	ArrayList<String> arrayOfCardInfo = null;
+	
 	static Boolean connection = false;
 	
 	static String resultsData;
@@ -194,6 +196,15 @@ public class MainActivity extends Activity implements MainFragment.MainListener,
 				savedInstanceState.putString("price2", "");
 				savedInstanceState.putString("price3", "");
 				savedInstanceState.putString("price4", "");
+			}
+			
+			if (arrayOfCardInfo != null && !arrayOfCardInfo.isEmpty())
+			{
+				savedInstanceState.putString("detailsNameCard", arrayOfCardInfo.get(0));
+				savedInstanceState.putString("detailsPriceCard", arrayOfCardInfo.get(1));
+				savedInstanceState.putString("detailsURLCard", arrayOfCardInfo.get(2));
+				savedInstanceState.putString("detailsHighCard", arrayOfCardInfo.get(3));
+				savedInstanceState.putString("detailsLowCard", arrayOfCardInfo.get(4));
 			}
 			
 			onSaveInstanceState(savedInstanceState);
@@ -351,6 +362,19 @@ public class MainActivity extends Activity implements MainFragment.MainListener,
 			cardPrice2.setText(savedInstanceState.getString("price2"));
 			cardPrice3.setText(savedInstanceState.getString("price3"));
 			cardPrice4.setText(savedInstanceState.getString("price4"));
+			
+			if (savedInstanceState.getString("detailsNameCard") != null )
+			{
+				
+				Log.i("Test to see if works", "Success");
+				DetailsFragment.nameView.setText(savedInstanceState.getString("detailsNameCard"));
+				DetailsFragment.priceView.setText("Price: " + savedInstanceState.getString("detailsPriceCard"));
+				DetailsFragment.URLView.setText(savedInstanceState.getString("detailsURLCard"));
+				DetailsFragment.highView.setText("High: " + savedInstanceState.getString("detailsHighCard"));
+				DetailsFragment.lowView.setText("Low: " + savedInstanceState.getString("detailsLowCard"));
+			}
+			
+			
 		}
 
 
@@ -379,6 +403,8 @@ public class MainActivity extends Activity implements MainFragment.MainListener,
 					
 					Cursor theCursor = getContentResolver().query(uri, null, null, null, null);
 					
+					arrayOfCardInfo = new ArrayList<String>();
+					
 					if (theCursor.getCount() > 0)
 					{
 						if (theCursor.moveToFirst() == true)
@@ -390,6 +416,13 @@ public class MainActivity extends Activity implements MainFragment.MainListener,
 								DetailsFragment.URLView.setText(theCursor.getString(3));
 								DetailsFragment.highView.setText("High: " + theCursor.getString(4));
 								DetailsFragment.lowView.setText("Low: " + theCursor.getString(5));
+								
+								
+								arrayOfCardInfo.add(theCursor.getString(1));
+								arrayOfCardInfo.add(theCursor.getString(2));
+								arrayOfCardInfo.add(theCursor.getString(3));
+								arrayOfCardInfo.add(theCursor.getString(4));
+								arrayOfCardInfo.add(theCursor.getString(5));
 								
 								theCursor.moveToNext();
 							};
